@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaginusLunch.Core\MaginusLunch.Core.csproj" />
+    <ProjectReference Include="..\MaginusLunch.Orders.Messages\MaginusLunch.Orders.Messages.csproj" />
+  </ItemGroup>
+
+</Project>

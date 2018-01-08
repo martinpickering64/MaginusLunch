@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.2-rc" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaginusLunch.Core\MaginusLunch.Core.csproj" />
+    <ProjectReference Include="..\MaginusLunch.GetEventStore\MaginusLunch.GetEventStore.csproj" />
+    <ProjectReference Include="..\MaginusLunch.Logging.MicrosoftLogging\MaginusLunch.Logging.MicrosoftLogging.csproj" />
+    <ProjectReference Include="..\MaginusLunch.Orders.Denormalizer\MaginusLunch.Orders.Denormalizer.csproj" />
+    <ProjectReference Include="..\MaginusLunch.Orders.Repository.MongoDB\MaginusLunch.Orders.Repository.MongoDB.csproj" />
+  </ItemGroup>
+
+</Project>

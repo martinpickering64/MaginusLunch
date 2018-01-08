@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaginusLunch.Core\MaginusLunch.Core.csproj" />
+    <ProjectReference Include="..\MaginusLunch.MongoDB\MaginusLunch.MongoDB.csproj" />
+    <ProjectReference Include="..\MaginusLunch.Orders.Repository\MaginusLunch.Orders.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
