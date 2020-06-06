@@ -7,8 +7,8 @@ namespace MaginusLunch.Core.Aggregates
 {
     public class ConventionBasedEventRouter : IRouteEvents
     {
-        private readonly IDictionary<Type, Action<object>> _handlers 
-            = new Dictionary<Type, Action<object>>();
+        private readonly IDictionary<Type, Action<Events.Event>> _handlers 
+            = new Dictionary<Type, Action<Events.Event>>();
 
         private readonly bool _throwOnApplyNotFound;
 
@@ -26,14 +26,14 @@ namespace MaginusLunch.Core.Aggregates
             _registered = aggregate ?? throw new ArgumentNullException("aggregate");
             foreach (var apply in GetInstanceMethods(aggregate, "Apply"))
             {
-                _handlers.Add(apply.MessageType, m => apply.Method.Invoke(aggregate, new[] { m }));
+                _handlers.Add(apply.EventType, m => apply.Method.Invoke(aggregate, new[] { m }));
             }
         }
 
-        public virtual void Dispatch(object anEvent)
+        public virtual void Dispatch(Events.Event anEvent)
         {
             if (anEvent == null) { throw new ArgumentNullException("anEvent"); }
-            if (_handlers.TryGetValue(anEvent.GetType(), out Action<object> handler))
+            if (_handlers.TryGetValue(anEvent.GetType(), out Action<Events.Event> handler))
             {
                 handler(anEvent);
             }
@@ -42,9 +42,6 @@ namespace MaginusLunch.Core.Aggregates
                 _registered.ThrowHandlerNotFound(anEvent);
             }
         }
-
-        private void Register(Type messageType, Action<object> handler) 
-            => _handlers[messageType] = handler;
 
         /// <summary>
         /// Get instance methods that are named Apply with one 
@@ -60,13 +57,13 @@ namespace MaginusLunch.Core.Aggregates
                 .Select(m => new MethodData
                 {
                     Method = m,
-                    MessageType = m.GetParameters().Single().ParameterType
+                    EventType = m.GetParameters().Single().ParameterType
                 });
 
         private class MethodData
         {
             public MethodInfo Method { get; set; }
-            public Type MessageType { get; set; }
+            public Type EventType { get; set; }
         }
     }
 }

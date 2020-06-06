@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace MaginusLunch.Core.Aggregates
@@ -24,7 +23,7 @@ namespace MaginusLunch.Core.Aggregates
         /// Apply an Event to the Aggregate to transition it to a new state.
         /// </summary>
         /// <param name="anEvent"></param>
-        void ApplyEvent(object anEvent);
+        void ApplyEvent(Events.Event anEvent);
 
         /// <summary>
         /// Access the list of uncommitted Events associated 
@@ -32,13 +31,15 @@ namespace MaginusLunch.Core.Aggregates
         /// yet to be saved to the Event Store.
         /// </summary>
         /// <returns>The collection of uncommitted Events.</returns>
-        IEnumerable<object> UncommittedEvents { get; }
+        IEnumerable<Events.Event> UncommittedEvents { get; }
 
         /// <summary>
         /// Empty the list of uncommitted Events.
         /// </summary>
         void ClearUncommittedEvents();
+
         bool Equals(IAggregate other);
+        
         bool Equals(object obj);
     }
 }

@@ -17,6 +17,6 @@ namespace MaginusLunch.Core.Aggregates
         /// Dispatch an Event to the registered Aggregates.
         /// </summary>
         /// <param name="anEvent"></param>
-        void Dispatch(object anEvent);
+        void Dispatch(Events.Event anEvent);
     }
 }

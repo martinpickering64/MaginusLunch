@@ -6,8 +6,8 @@ namespace MaginusLunch.Core.Aggregates
     public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
     {
         public const long NO_VERSION_YET = -100;
-        private readonly ICollection<object> _uncommittedEvents 
-            = new LinkedList<object>();
+        private readonly ICollection<Events.Event> _uncommittedEvents 
+            = new LinkedList<Events.Event>();
 
         protected AggregateRoot() => Version = NO_VERSION_YET;
 
@@ -27,19 +27,19 @@ namespace MaginusLunch.Core.Aggregates
 
         public long Version { get; protected set; }
 
-        public void ApplyEvent(object anEvent)
+        public void ApplyEvent(Events.Event anEvent)
         {
             RegisteredRoutes.Dispatch(anEvent);
             Version++;
         }
 
-        public IEnumerable<object> UncommittedEvents 
+        public IEnumerable<Events.Event> UncommittedEvents 
             => _uncommittedEvents;
 
         public void ClearUncommittedEvents() 
             => _uncommittedEvents.Clear();
 
-        protected void RaiseEvent(object anEvent)
+        protected void RaiseEvent(Events.Event anEvent)
         {
             ApplyEvent(anEvent);
             _uncommittedEvents.Add(anEvent);
@@ -63,9 +63,9 @@ namespace MaginusLunch.Core.Aggregates
         public override bool Equals(object obj) => Equals(obj as IAggregate);
 
         public static bool operator ==(AggregateRoot leftAggregate, IAggregate rightAggregate) 
-            => (object)leftAggregate != null && leftAggregate.Equals(rightAggregate);
+            => leftAggregate is object && leftAggregate.Equals(rightAggregate);
 
         public static bool operator !=(AggregateRoot leftAggregate, IAggregate rightAggregate) 
-            => (object)leftAggregate is null || !(leftAggregate.Equals(rightAggregate));
+            => leftAggregate is null || !(leftAggregate.Equals(rightAggregate));
     }
 }
