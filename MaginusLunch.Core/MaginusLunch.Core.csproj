@@ -7,6 +7,8 @@
     <Authors>Martin Pickering</Authors>
     <Copyright>2020, Martin Pickering</Copyright>
     <Description>The core parts of the Maginus Lunch Application.</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/martinpickering64/MaginusLunch</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,5 +18,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
